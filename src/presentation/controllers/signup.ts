@@ -10,5 +10,9 @@ export class SignUpController implements Controller {
         return badRequest(new Error())
       }
     }
+    const { password, passwordConfirmation } = httpRequest.body
+    if (password !== passwordConfirmation) {
+      return badRequest(new Error())
+    }
   }
 }

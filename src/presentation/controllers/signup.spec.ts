@@ -1,4 +1,4 @@
-import { badRequest } from '../helpers/http'
+import { badRequest } from '../helpers/http-helper'
 import { SignUpController } from './signup'
 
 describe('SignUp Controller', () => {
@@ -21,6 +21,19 @@ describe('SignUp Controller', () => {
       body: {
         name: 'any_name',
         password: 'any_password',
+        passwordConfirmation: 'any_password'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(badRequest(new Error()))
+  })
+
+  test('Should return 400 if no password is provided', async () => {
+    const sut = new SignUpController()
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'any_email@email.com',
         passwordConfirmation: 'any_password'
       }
     }

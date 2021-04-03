@@ -4,9 +4,11 @@ import { HttpRequest, HttpResponse } from '../protocols/http'
 
 export class SignUpController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-    const { name } = httpRequest.body
-    if (!name) {
-      return badRequest(new Error())
+    const requiredParameters = ['name', 'email']
+    for (const parameter of requiredParameters) {
+      if (!httpRequest.body[parameter]) {
+        return badRequest(new Error())
+      }
     }
   }
 }

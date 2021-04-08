@@ -1,4 +1,4 @@
-import { HttpRequest, badRequest, MissingParamError, InvalidParamError, EmailValidator } from './signup-controller-protocols'
+import { HttpRequest, badRequest, MissingParamError, InvalidParamError, EmailValidator, serverError } from './signup-controller-protocols'
 import { SignUpController } from './signup-controller'
 
 class EmailValidatorStub implements EmailValidator {
@@ -112,5 +112,15 @@ describe('SignUp Controller', () => {
     const httpRequest = makeFakeRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(badRequest(new InvalidParamError('email')))
+  })
+
+  test('Should returns 500 if email validator throws', async () => {
+    const { sut, emailValidatorStub } = makeSut()
+    jest.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce(() => {
+      throw new Error()
+    })
+    const httpRequest = makeFakeRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })

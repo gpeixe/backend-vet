@@ -3,7 +3,7 @@ import { InvalidParamError } from '../errors/invalid-param-error'
 import { MissingParamError } from '../errors/missing-param-error'
 import { badRequest } from '../helpers/http-helper'
 import { HttpRequest } from '../protocols/http'
-import { SignUpController } from './signup'
+import { SignUpController } from './signup-controller'
 
 class EmailValidatorStub implements EmailValidator {
   isValid (email: string): boolean {

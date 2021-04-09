@@ -1,4 +1,4 @@
-import { HttpRequest, badRequest, MissingParamError, InvalidParamError, EmailValidator, serverError, AddAccount, AddAccountModel } from './signup-controller-protocols'
+import { HttpRequest, badRequest, MissingParamError, InvalidParamError, EmailValidator, serverError, AddAccount, AddAccountModel, ok } from './signup-controller-protocols'
 import { SignUpController } from './signup-controller'
 import { AccountModel } from '../../domain/entities/account'
 
@@ -14,7 +14,7 @@ class AddAccountStub implements AddAccount {
       id: 'any_id',
       name: 'any_name',
       email: 'any_email',
-      password: 'password'
+      password: 'hashed_password'
     }))
   }
 }
@@ -160,5 +160,17 @@ describe('SignUp Controller', () => {
     const httpRequest = makeFakeRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 200 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(makeFakeRequest())
+    const fakeAccount = {
+      id: 'any_id',
+      name: 'any_name',
+      email: 'any_email',
+      password: 'hashed_password'
+    }
+    expect(httpResponse).toEqual(ok(fakeAccount))
   })
 })

@@ -1,8 +1,8 @@
-import { AccountModel } from '../../domain/entities/account'
-import { AddAccount, AddAccountModel } from '../../domain/use-cases/add-account'
-import { AddAccountRepository } from '../protocols/add-account-repository'
-import { Hasher } from '../protocols/hasher'
-import { IdGenerator } from '../protocols/id-generator'
+import { AccountModel } from '../../../domain/entities/account'
+import { AddAccount, AddAccountModel } from '../../../domain/use-cases/add-account'
+import { AddAccountRepository } from '../../protocols/add-account-repository'
+import { Hasher } from '../../protocols/hasher'
+import { IdGenerator } from '../../protocols/id-generator'
 
 export class DbAddAccount implements AddAccount {
   constructor (

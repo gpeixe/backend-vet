@@ -1,8 +1,8 @@
-import { AccountModel } from '../../domain/entities/account'
-import { AddAccountModel } from '../../domain/use-cases/add-account'
-import { AddAccountRepository } from '../protocols/add-account-repository'
-import { Hasher } from '../protocols/hasher'
-import { IdGenerator } from '../protocols/id-generator'
+import { AccountModel } from '../../../domain/entities/account'
+import { AddAccountModel } from '../../../domain/use-cases/add-account'
+import { AddAccountRepository } from '../../protocols/add-account-repository'
+import { Hasher } from '../../protocols/hasher'
+import { IdGenerator } from '../../protocols/id-generator'
 import { DbAddAccount } from './db-add-account'
 
 class IdGeneratorStub implements IdGenerator {

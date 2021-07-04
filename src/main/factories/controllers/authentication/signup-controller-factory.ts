@@ -1,4 +1,4 @@
-import { DbAddAccount } from '../../../../data/use-cases/db-add-account'
+import { DbAddAccount } from '../../../../data/use-cases/db-add-account/db-add-account'
 import { BcryptAdapter } from '../../../../infra/db/adapters/bcrypt-adapter'
 import { EmailValidatorAdapter } from '../../../../infra/db/adapters/email-validator-adapter'
 import { UuidAdapter } from '../../../../infra/db/adapters/uuid-adapter'

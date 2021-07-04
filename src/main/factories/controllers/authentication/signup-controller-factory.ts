@@ -3,7 +3,7 @@ import { BcryptAdapter } from '../../../../infra/db/adapters/bcrypt-adapter'
 import { EmailValidatorAdapter } from '../../../../infra/db/adapters/email-validator-adapter'
 import { UuidAdapter } from '../../../../infra/db/adapters/uuid-adapter'
 import { AccountMongoRepository } from '../../../../infra/db/mongodb/account-mongo-repository'
-import { SignUpController } from '../../../../presentation/controllers/signup-controller'
+import { SignUpController } from '../../../../presentation/controllers/signup/signup-controller'
 import { Controller } from '../../../../presentation/protocols'
 
 export const makeSignUpController = (): Controller => {

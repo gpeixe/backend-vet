@@ -8,7 +8,8 @@
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:staged": "npm test -- --findRelatedTests .",
     "test:ci": "npm test -- --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start": "nodemon ./src/main/server.ts"
   },
   "author": "",
   "license": "ISC",
@@ -28,12 +29,14 @@
     "husky": "^6.0.0",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
+    "nodemon": "^2.0.9",
     "ts-jest": "^26.5.4",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "mongodb": "^3.6.9",
     "uuid": "^8.3.2"

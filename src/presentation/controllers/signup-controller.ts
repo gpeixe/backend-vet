@@ -1,5 +1,6 @@
 import { ok } from '../helpers/http-helper'
-import { HttpRequest, HttpResponse, Controller, badRequest, MissingParamError, InvalidParamError, EmailValidator, serverError, AddAccount } from './signup-controller-protocols'
+import { EmailValidator } from '../protocols/email-validator'
+import { HttpRequest, HttpResponse, Controller, badRequest, MissingParamError, InvalidParamError, serverError, AddAccount } from './signup-controller-protocols'
 
 export class SignUpController implements Controller {
   constructor (
@@ -28,8 +29,10 @@ export class SignUpController implements Controller {
         email,
         password
       })
+      console.log('Account: ', account)
       return ok(account)
     } catch (error) {
+      console.log('Error: ', error.message)
       return serverError(error)
     }
   }

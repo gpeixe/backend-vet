@@ -1,6 +1,6 @@
 import { RegisterNewPet } from '../../../domain/use-cases/register-new-pet'
 import { MissingParamError } from '../../errors'
-import { badRequest, created, serverError } from '../../helpers/http-helper'
+import { badRequest, created, serverError, unauthorized } from '../../helpers/http-helper'
 import { Controller, HttpRequest, HttpResponse } from '../../protocols'
 
 export class RegisterNewPetController implements Controller {
@@ -14,6 +14,10 @@ export class RegisterNewPetController implements Controller {
         if (!httpRequest.body[field]) {
           return badRequest(new MissingParamError(field))
         }
+      }
+      const token = httpRequest.headers?.['x-access-token']
+      if (!token) {
+        return unauthorized()
       }
       const { name, age, color, breed, weight, owner, description, petPhotoUrl } = httpRequest.body
       const pet = await this.registerNewPet.register({ name, age, color, breed, weight, owner, description, petPhotoUrl })

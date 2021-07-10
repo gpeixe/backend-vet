@@ -1,5 +1,5 @@
 import { GetAllPets } from '../../../domain/use-cases/get-all-pets'
-import { noContent, ok, serverError } from '../../helpers/http-helper'
+import { noContent, ok, serverError, unauthorized } from '../../helpers/http-helper'
 import { Controller, HttpRequest, HttpResponse } from '../../protocols'
 
 export class GetAllPetsController implements Controller {
@@ -13,6 +13,10 @@ export class GetAllPetsController implements Controller {
       console.log('Pets: ', pets)
       if (pets.length === 0) {
         return noContent()
+      }
+      const token = httpRequest.headers?.['x-access-token']
+      if (!token) {
+        return unauthorized()
       }
       return ok(pets)
     } catch (error) {

@@ -1,6 +1,6 @@
 import { DeletePet } from '../../../domain/use-cases/delete-pet'
 import { MissingParamError } from '../../errors'
-import { badRequest, noContent, serverError } from '../../helpers/http-helper'
+import { badRequest, noContent, serverError, unauthorized } from '../../helpers/http-helper'
 import { Controller, HttpRequest, HttpResponse } from '../../protocols'
 
 export class DeletePetController implements Controller {
@@ -13,6 +13,10 @@ export class DeletePetController implements Controller {
       const id = httpRequest.params?.id
       if (!id) {
         return badRequest(new MissingParamError('id'))
+      }
+      const token = httpRequest.headers?.['x-access-token']
+      if (!token) {
+        return unauthorized()
       }
       await this.deletePet.delete(id)
       return noContent()

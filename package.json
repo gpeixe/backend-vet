@@ -9,7 +9,7 @@
     "test:staged": "npm test -- --findRelatedTests .",
     "test:ci": "npm test -- --coverage",
     "prepare": "husky install",
-    "start": "nodemon ./src/main/server.ts"
+    "start": "npm i && nodemon ./src/main/server.ts"
   },
   "author": "",
   "license": "ISC",
